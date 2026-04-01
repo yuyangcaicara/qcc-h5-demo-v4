@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <title>在微信找客户，大多数人第一步就错了</title>
-  <link rel="stylesheet" href="./css/style.css?v=3"/>
+  <link rel="stylesheet" href="./css/style.css?v=4"/>
 </head>
 <body>
 
@@ -21,8 +21,10 @@
     </div>
   </section>
 
-  <!-- ====== S1: 唤醒问题（不是告诉，是让用户自己发现） ====== -->
-  <section class="content-section" id="sec-insight">
+  <!-- ====== 内容流（所有互动嵌在文字里） ====== -->
+  <section class="content-section" id="sec-main">
+
+    <!-- S1: 唤醒 -->
     <div class="content-block fade-in">
       <p class="big-text">你有没有想过一个问题——</p>
       <p class="body-text accent-text">为什么你每天都在发朋友圈、加群、聊客户，<br/><strong>客户还是不找你？</strong></p>
@@ -37,7 +39,7 @@
       <p class="body-text"><strong>不是你不行，是你在用错误的方式死磕。</strong></p>
     </div>
 
-    <!-- 技法3: 戳痛点——用画面感让用户"中招" -->
+    <!-- S2: 痛点画面感 -->
     <div class="content-block fade-in">
       <p class="divider-text">———</p>
       <p class="big-text accent">说个你可能不愿意承认的事。</p>
@@ -61,7 +63,7 @@
       <p class="body-text">他们刷朋友圈是放松，不是来被推销的。<br/>你的内容无法和他建立关联，<br/>再专业的介绍，对他来说都是<span class="text-red">无效广告</span>。</p>
     </div>
 
-    <!-- 技法2: 翻转——给正确方向 -->
+    <!-- S3: 翻转 -->
     <div class="content-block fade-in">
       <p class="divider-text">———</p>
       <p class="big-text accent">那些不缺客户的老板，到底在做什么？</p>
@@ -99,75 +101,98 @@
 
     <div class="content-block fade-in">
       <p class="body-text">方向对了，每一步都在帮你获客。<br/>方向错了，再努力也是无效曝光。</p>
-      <p class="big-text" style="margin-top:16px;">你现阶段适合走哪条？</p>
-      <p class="body-text">两个问题就能判断。👇</p>
     </div>
-  </section>
 
-  <!-- ====== INTERACTION 1 ====== -->
-  <section class="interaction-section" id="interact-1">
-    <div class="interact-prompt fade-in">
-      <p class="interact-question">先说说，你现在最头疼的是？</p>
-      <div class="interact-options" id="options-1">
-        <button class="interact-btn" data-group="1" data-value="no-leads" data-scores='{"ad":3}'>
-          <span class="btn-main">😩 压根没客户来</span>
-          <span class="btn-sub">每天干等，不知道客户在哪</span>
+    <!-- ====== 互动1：嵌入内容流 ====== -->
+    <div class="content-block fade-in">
+      <p class="divider-text">———</p>
+      <p class="big-text">不过，<strong>哪条路适合你</strong>，得看你现在卡在哪。</p>
+      <p class="body-text" style="margin-bottom:4px;">下面三种情况，<strong>哪个最像你？</strong></p>
+      <p class="body-text text-hint">（点一个，后面的内容会不一样）</p>
+    </div>
+
+    <div class="content-block" id="interact-1">
+      <div class="inline-options" id="options-1">
+        <button class="inline-opt fade-in" data-group="1" data-value="no-leads" data-scores='{"ad":3}'>
+          <span class="opt-marker">①</span>
+          <span class="opt-body">
+            <span class="opt-main">压根没客户来</span>
+            <span class="opt-sub">每天干等，不知道客户在哪</span>
+          </span>
         </button>
-        <button class="interact-btn" data-group="1" data-value="waste-money" data-scores='{"agency":3}'>
-          <span class="btn-main">💸 花了钱没效果</span>
-          <span class="btn-sub">试过几种方法，钱花了人没来</span>
+        <button class="inline-opt fade-in" data-group="1" data-value="waste-money" data-scores='{"agency":3}'>
+          <span class="opt-marker">②</span>
+          <span class="opt-body">
+            <span class="opt-main">花了钱没效果</span>
+            <span class="opt-sub">试过几种方法，钱花了人没来</span>
+          </span>
         </button>
-        <button class="interact-btn" data-group="1" data-value="unstable" data-scores='{"content":2,"ad":1}'>
-          <span class="btn-main">🎰 有客户但全靠运气</span>
-          <span class="btn-sub">好的时候忙不过来，差的时候没人问</span>
+        <button class="inline-opt fade-in" data-group="1" data-value="unstable" data-scores='{"content":2,"ad":1}'>
+          <span class="opt-marker">③</span>
+          <span class="opt-body">
+            <span class="opt-main">有客户但全靠运气</span>
+            <span class="opt-sub">好的时候忙不过来，差的时候没人问</span>
+          </span>
         </button>
       </div>
     </div>
 
-    <div class="interact-feedback hidden" id="feedback-1"></div>
-  </section>
+    <!-- 互动1反馈（融入文字流） -->
+    <div class="content-block hidden" id="feedback-1"></div>
 
-  <!-- ====== BRIDGE ====== -->
-  <section class="content-section hidden" id="sec-bridge">
-    <div class="content-block fade-in">
-      <p class="big-text">你说的这些，很正常。</p>
-      <p class="body-text"><strong>但同样的问题，解法完全不同。</strong></p>
-      <p class="body-text">有人适合自己冲，有人适合找帮手。<br/>关键看一个事 👇</p>
+    <!-- ====== 过渡段 ====== -->
+    <div class="content-block hidden" id="sec-bridge">
+      <div class="fade-in">
+        <p class="body-text"><strong>同样的问题，解法完全不同。</strong></p>
+        <p class="body-text">有人适合自己冲，有人适合找帮手。<br/>关键看一件事——</p>
+      </div>
     </div>
-  </section>
 
-  <!-- ====== INTERACTION 2 ====== -->
-  <section class="interaction-section hidden" id="interact-2">
-    <div class="interact-prompt fade-in">
-      <p class="interact-question">找客户这事，你更想怎么搞？</p>
-      <div class="interact-options" id="options-2">
-        <button class="interact-btn" data-group="2" data-value="self" data-scores='{"ad":3}'>
-          <span class="btn-main">💪 给我方法，我自己干</span>
-          <span class="btn-sub">执行力不差，缺的是正确方向</span>
+    <!-- ====== 互动2：嵌入内容流 ====== -->
+    <div class="content-block hidden" id="interact-2-wrap">
+      <div class="fade-in">
+        <p class="big-text">找客户这事，<strong>你更想怎么搞？</strong></p>
+      </div>
+      <div class="inline-options" id="options-2">
+        <button class="inline-opt fade-in" data-group="2" data-value="self" data-scores='{"ad":3}'>
+          <span class="opt-marker">①</span>
+          <span class="opt-body">
+            <span class="opt-main">给我方法，我自己干</span>
+            <span class="opt-sub">执行力不差，缺的是正确方向</span>
+          </span>
         </button>
-        <button class="interact-btn" data-group="2" data-value="delegate" data-scores='{"agency":3}'>
-          <span class="btn-main">🙌 有人帮我搞定最好</span>
-          <span class="btn-sub">不想操心细节，我只看结果</span>
+        <button class="inline-opt fade-in" data-group="2" data-value="delegate" data-scores='{"agency":3}'>
+          <span class="opt-marker">②</span>
+          <span class="opt-body">
+            <span class="opt-main">有人帮我搞定最好</span>
+            <span class="opt-sub">不想操心细节，我只看结果</span>
+          </span>
         </button>
-        <button class="interact-btn" data-group="2" data-value="collab" data-scores='{"content":2,"agency":1}'>
-          <span class="btn-main">🤝 我把关方向，有人帮我执行</span>
-          <span class="btn-sub">大方向我定，落地有人配合</span>
+        <button class="inline-opt fade-in" data-group="2" data-value="collab" data-scores='{"content":2,"agency":1}'>
+          <span class="opt-marker">③</span>
+          <span class="opt-body">
+            <span class="opt-main">我把关方向，有人帮我执行</span>
+            <span class="opt-sub">大方向我定，落地有人配合</span>
+          </span>
         </button>
       </div>
     </div>
 
-    <div class="interact-feedback hidden" id="feedback-2"></div>
-  </section>
+    <!-- 互动2反馈 -->
+    <div class="content-block hidden" id="feedback-2"></div>
 
-  <!-- ====== PRE-RESULT ====== -->
-  <section class="content-section hidden" id="sec-pre-result">
-    <div class="content-block fade-in">
-      <p class="big-text">好，答案来了 👇</p>
-      <p class="body-text">结合你说的情况——<strong>最适合你现阶段的获客方式</strong>是：</p>
+    <!-- ====== 过渡到结果 ====== -->
+    <div class="content-block hidden" id="sec-pre-result">
+      <div class="fade-in">
+        <p class="divider-text">———</p>
+        <p class="big-text">好，说回你的情况。</p>
+        <p class="body-text">结合你刚才说的——<strong>最适合你现阶段的获客方式</strong>是：</p>
+      </div>
     </div>
+
   </section>
 
-  <!-- ====== RESULT（五层递进：唤醒→方法→案例→消顾虑→催化） ====== -->
+  <!-- ====== RESULT（五层递进） ====== -->
   <section class="result-section hidden" id="sec-result">
     <!-- 第1层：推荐结果 -->
     <div class="result-hero fade-in">
@@ -176,27 +201,27 @@
       <h2 class="result-title" id="result-title">让对的客户，主动来找你</h2>
     </div>
 
-    <!-- 第2层：为什么（唤醒+戳痛） -->
+    <!-- 第2层：为什么 -->
     <div class="result-card fade-in">
       <p class="result-card-title">💡 为什么是这条路</p>
       <p class="result-reason" id="result-reason"></p>
       <ul class="result-points" id="result-points"></ul>
     </div>
 
-    <!-- 第3层：怎么做（给方法，只给框架） -->
+    <!-- 第3层：怎么做 -->
     <div class="result-card fade-in">
       <p class="result-card-title">🚀 怎么做·核心思路</p>
       <p class="result-how" id="result-how"></p>
       <ol class="result-steps" id="result-steps"></ol>
     </div>
 
-    <!-- 第4层：同行案例（建立信任） -->
+    <!-- 第4层：同行案例 -->
     <div class="case-card fade-in">
       <p class="case-title">📊 和你情况类似的老板，已经跑出了结果</p>
       <div class="case-items" id="case-items"></div>
     </div>
 
-    <!-- 第5层：信息缺口（打消顾虑+制造需求） -->
+    <!-- 第5层：信息缺口 -->
     <div class="info-gap-card fade-in">
       <p class="gap-title">⚠️ 但这里有个关键——</p>
       <p class="gap-text" id="gap-text">具体怎么设置、预算怎么分配、第一步从哪开始，不同行业差别很大。</p>
@@ -235,6 +260,6 @@
 
 </div>
 
-<script src="./js/main.js?v=3"></script>
+<script src="./js/main.js?v=4"></script>
 </body>
 </html>

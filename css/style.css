@@ -157,15 +157,15 @@ body {
   color: var(--text-muted);
 }
 
+.text-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 0;
+}
+
 .text-red {
   color: var(--accent);
   font-weight: 600;
-}
-
-.callout-text {
-  padding-left: 4px;
-  font-size: 16px;
-  line-height: 2.1;
 }
 
 .divider-text {
@@ -176,7 +176,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* ===== Pain Card (痛点卡片) ===== */
+/* ===== Pain Card ===== */
 .pain-card {
   background: var(--card-bg);
   border-radius: var(--radius);
@@ -192,7 +192,6 @@ body {
   font-size: 15px;
   line-height: 1.7;
   color: var(--text);
-  padding-left: 0;
 }
 
 .pain-item strong {
@@ -235,78 +234,105 @@ body {
   line-height: 1.6;
 }
 
-/* ===== Interaction Sections ===== */
-.interaction-section {
-  padding: 0 24px;
-  margin-bottom: 8px;
-}
-
-.interact-prompt {
-  margin-bottom: 20px;
-}
-
-.interact-question {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-.interact-options {
+/* ===== Inline Options (融入内容流的互动) ===== */
+.inline-options {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.inline-opt {
+  display: flex;
+  align-items: flex-start;
   gap: 12px;
-}
-
-.interact-btn {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
   width: 100%;
-  padding: 18px 20px;
-  background: var(--card-bg);
-  border: 2px solid rgba(0,0,0,0.06);
-  border-radius: 14px;
+  padding: 16px 18px;
+  background: transparent;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  transition: all 0.25s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.interact-btn .btn-main {
+.opt-marker {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.04);
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 1px;
+  transition: all 0.25s ease;
+}
+
+.opt-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.opt-main {
   font-size: 16px;
   font-weight: 600;
   color: var(--text);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-.interact-btn .btn-sub {
+.opt-sub {
   font-size: 13px;
   color: var(--text-muted);
   line-height: 1.5;
 }
 
+/* Hover */
 @media (hover: hover) and (pointer: fine) {
-  .interact-btn:hover {
+  .inline-opt:hover {
     border-color: var(--green);
-    box-shadow: 0 4px 16px rgba(27, 191, 131, 0.12);
+    background: var(--green-bg);
+  }
+  .inline-opt:hover .opt-marker {
+    background: var(--green);
+    color: #fff;
   }
 }
 
-.interact-btn.selected {
+/* Active press */
+.inline-opt:active {
+  transform: scale(0.98);
+}
+
+/* Selected */
+.inline-opt.selected {
   border-color: var(--green);
   background: var(--green-bg);
 }
 
-.interact-btn.dimmed {
-  opacity: 0.4;
-  pointer-events: none;
+.inline-opt.selected .opt-marker {
+  background: var(--green);
+  color: #fff;
 }
 
-/* ===== Interaction Feedback ===== */
-.interact-feedback {
-  padding: 24px 0;
+.inline-opt.selected .opt-main {
+  color: var(--green-deep);
+}
+
+/* Dimmed (not selected) */
+.inline-opt.dimmed {
+  opacity: 0.35;
+  pointer-events: none;
+  border-color: transparent;
+}
+
+/* ===== Inline Feedback (融入文字流) ===== */
+.inline-feedback {
+  padding: 0;
 }
 
 .feedback-text {
@@ -492,7 +518,7 @@ body {
   color: var(--green-deep);
 }
 
-/* ===== Case Card (同行案例) ===== */
+/* ===== Case Card ===== */
 .case-card {
   background: var(--card-bg);
   border-radius: var(--radius);

@@ -1,4 +1,4 @@
-/* ===== V4.3: 应用"小a工作室"五层转化技法 ===== */
+/* ===== V4.4: 互动融入内容流 ===== */
 
 /* --- 结果数据 --- */
 const profiles = {
@@ -22,35 +22,47 @@ const profiles = {
   }
 };
 
-/* --- 互动1 反馈（唤醒式，不是分析式） --- */
+/* --- 互动1 反馈（融入文字流，像作者接话） --- */
 const feedbacks1 = {
   "no-leads": {
-    html: `<p class="feedback-text"><strong>没客户来——这是最多老板卡在这一步的。</strong></p>
-<p class="feedback-text">不是你不行。是<span class="feedback-highlight">客户根本看不到你</span>。</p>
-<p class="feedback-text">方法一换，一周就能感觉到变化。</p>`
+    html: `<div class="fade-in">
+<p class="body-text"><strong>没客户来——这是最多老板卡住的地方。</strong></p>
+<p class="body-text">不是你不行。是<span class="feedback-highlight">客户根本看不到你</span>。</p>
+<p class="body-text">方法一换，一周就能感觉到变化。</p>
+</div>`
   },
   "waste-money": {
-    html: `<p class="feedback-text"><strong>花了钱没效果——这比没花钱还让人窝火。</strong></p>
-<p class="feedback-text">但好消息是，你比那些还没开始的老板强——起码你知道<span class="feedback-highlight">哪些路走不通了</span>。</p>
-<p class="feedback-text">关键不是换方法，是<strong>换做法</strong>。</p>`
+    html: `<div class="fade-in">
+<p class="body-text"><strong>花了钱没效果——比没花钱还让人窝火。</strong></p>
+<p class="body-text">但好消息是，你比那些还没开始的老板强——起码你知道<span class="feedback-highlight">哪些路走不通了</span>。</p>
+<p class="body-text">关键不是换方法，是<strong>换做法</strong>。</p>
+</div>`
   },
   "unstable": {
-    html: `<p class="feedback-text"><strong>有客户说明方向对了。</strong></p>
-<p class="feedback-text">不稳定的原因通常只有一个——<span class="feedback-highlight">还没形成稳定的获客通道</span>。</p>
-<p class="feedback-text">你离"不愁客户"其实只差一步。</p>`
+    html: `<div class="fade-in">
+<p class="body-text"><strong>有客户说明方向对了。</strong></p>
+<p class="body-text">不稳定的原因通常只有一个——<span class="feedback-highlight">还没形成稳定的获客通道</span>。</p>
+<p class="body-text">你离"不愁客户"其实只差一步。</p>
+</div>`
   }
 };
 
 /* --- 互动2 反馈 --- */
 const feedbacks2 = {
   "self": {
-    html: `<p class="feedback-text"><strong>执行力不差，缺的就是正确方向。</strong><br/>方向对了，你能跑得很快。</p>`
+    html: `<div class="fade-in">
+<p class="body-text"><strong>执行力不差，缺的就是正确方向。</strong>方向对了，你能跑得很快。</p>
+</div>`
   },
   "delegate": {
-    html: `<p class="feedback-text"><strong>你的时间值钱，不该花在试错上。</strong><br/>关键是<span class="feedback-highlight">找对帮你做的人</span>。</p>`
+    html: `<div class="fade-in">
+<p class="body-text"><strong>你的时间值钱，不该花在试错上。</strong>关键是<span class="feedback-highlight">找对帮你做的人</span>。</p>
+</div>`
   },
   "collab": {
-    html: `<p class="feedback-text"><strong>方向你把握，执行有人配合——</strong>这是最聪明的方式。<br/>关键是<span class="feedback-highlight">配合模式得设计对</span>。</p>`
+    html: `<div class="fade-in">
+<p class="body-text"><strong>方向你把握，执行有人配合——</strong>这是最聪明的方式。关键是<span class="feedback-highlight">配合模式得设计对</span>。</p>
+</div>`
   }
 };
 
@@ -183,8 +195,9 @@ function handleInteraction(group, btn) {
     state.scores[type] += score;
   });
 
+  // 选项反馈
   const container = document.getElementById(`options-${group}`);
-  container.querySelectorAll(".interact-btn").forEach(b => {
+  container.querySelectorAll(".inline-opt").forEach(b => {
     if (b === btn) {
       b.classList.add("selected");
     } else {
@@ -200,7 +213,7 @@ function handleInteraction(group, btn) {
 
 function showFeedback(group, value) {
   const feedbackEl = document.getElementById(`feedback-${group}`);
-  
+
   if (group === 1) {
     const fb = feedbacks1[value];
     feedbackEl.innerHTML = fb.html;
@@ -208,8 +221,21 @@ function showFeedback(group, value) {
     observeNewElements(feedbackEl);
 
     setTimeout(() => {
-      revealSection("sec-bridge");
-      setTimeout(() => revealSection("interact-2"), 600);
+      // 显示过渡段
+      const bridge = document.getElementById("sec-bridge");
+      bridge.classList.remove("hidden");
+      observeNewElements(bridge);
+
+      setTimeout(() => {
+        // 显示互动2
+        const interact2 = document.getElementById("interact-2-wrap");
+        interact2.classList.remove("hidden");
+        observeNewElements(interact2);
+
+        setTimeout(() => {
+          interact2.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }, 600);
     }, 800);
   }
 
@@ -220,10 +246,20 @@ function showFeedback(group, value) {
     observeNewElements(feedbackEl);
 
     setTimeout(() => {
-      revealSection("sec-pre-result");
+      // 显示结果过渡
+      const preResult = document.getElementById("sec-pre-result");
+      preResult.classList.remove("hidden");
+      observeNewElements(preResult);
+
       setTimeout(() => {
         renderResult();
-        revealSection("sec-result");
+        const resultSec = document.getElementById("sec-result");
+        resultSec.classList.remove("hidden");
+        observeNewElements(resultSec);
+
+        setTimeout(() => {
+          resultSec.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
       }, 1000);
     }, 800);
   }
@@ -231,16 +267,6 @@ function showFeedback(group, value) {
   setTimeout(() => {
     feedbackEl.scrollIntoView({ behavior: "smooth", block: "center" });
   }, 200);
-}
-
-function revealSection(id) {
-  const sec = document.getElementById(id);
-  sec.classList.remove("hidden");
-  observeNewElements(sec);
-
-  setTimeout(() => {
-    sec.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 100);
 }
 
 /* ===== Result ===== */
@@ -319,11 +345,11 @@ function resetAll() {
     el.innerHTML = "";
   });
 
-  ["sec-bridge", "interact-2", "sec-pre-result", "sec-result"].forEach(id => {
+  ["sec-bridge", "interact-2-wrap", "sec-pre-result", "sec-result"].forEach(id => {
     document.getElementById(id).classList.add("hidden");
   });
 
-  document.querySelectorAll(".interact-btn").forEach(btn => {
+  document.querySelectorAll(".inline-opt").forEach(btn => {
     btn.classList.remove("selected", "dimmed");
     btn.disabled = false;
   });
@@ -334,7 +360,7 @@ function resetAll() {
 /* ===== Init ===== */
 function init() {
   document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".interact-btn");
+    const btn = e.target.closest(".inline-opt");
     if (!btn || btn.disabled) return;
 
     const group = parseInt(btn.dataset.group);
