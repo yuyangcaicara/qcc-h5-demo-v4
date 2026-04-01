@@ -92,6 +92,7 @@ body {
   font-size: 16px;
   color: var(--text-soft);
   margin-bottom: 48px;
+  font-weight: 500;
 }
 
 .scroll-hint {
@@ -146,6 +147,12 @@ body {
   font-weight: 700;
 }
 
+.accent-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
 .text-muted {
   color: var(--text-muted);
 }
@@ -167,6 +174,30 @@ body {
   font-size: 14px;
   letter-spacing: 6px;
   margin-bottom: 20px;
+}
+
+/* ===== Pain Card (痛点卡片) ===== */
+.pain-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pain-item {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  padding-left: 0;
+}
+
+.pain-item strong {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 /* ===== Three Paths Cards ===== */
@@ -449,6 +480,16 @@ body {
 
 .gap-text strong {
   color: var(--text);
+}
+
+.gap-cta {
+  margin-top: 10px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.gap-cta strong {
+  color: var(--green-deep);
 }
 
 /* ===== Case Card (同行案例) ===== */

@@ -1,4 +1,4 @@
-/* ===== V4.2: 爆款文案 + 加微转化优化 ===== */
+/* ===== V4.3: 应用"小a工作室"五层转化技法 ===== */
 
 /* --- 结果数据 --- */
 const profiles = {
@@ -22,84 +22,81 @@ const profiles = {
   }
 };
 
-/* --- 互动1 选完后的反馈文案 --- */
+/* --- 互动1 反馈（唤醒式，不是分析式） --- */
 const feedbacks1 = {
   "no-leads": {
-    html: `<p class="feedback-text"><strong>你说的这个状态，80% 的老板都经历过。</strong></p>
-<p class="feedback-text">不是你不行，是<span class="feedback-highlight">获客渠道还没打通</span>。</p>
-<p class="feedback-text">好消息是——这种情况反而最好解决。方法对了，一周就能看到变化。</p>`,
-    weight: "velocity"
+    html: `<p class="feedback-text"><strong>没客户来——这是最多老板卡在这一步的。</strong></p>
+<p class="feedback-text">不是你不行。是<span class="feedback-highlight">客户根本看不到你</span>。</p>
+<p class="feedback-text">方法一换，一周就能感觉到变化。</p>`
   },
   "waste-money": {
-    html: `<p class="feedback-text"><strong>花了钱没效果，这是最让人窝火的。</strong></p>
-<p class="feedback-text">但你比那些"还没花钱"的老板强——起码你知道<span class="feedback-highlight">哪些路走不通了</span>。</p>
-<p class="feedback-text">接下来的关键是：别换方法，<strong>换做法</strong>。</p>`,
-    weight: "trust"
+    html: `<p class="feedback-text"><strong>花了钱没效果——这比没花钱还让人窝火。</strong></p>
+<p class="feedback-text">但好消息是，你比那些还没开始的老板强——起码你知道<span class="feedback-highlight">哪些路走不通了</span>。</p>
+<p class="feedback-text">关键不是换方法，是<strong>换做法</strong>。</p>`
   },
   "unstable": {
-    html: `<p class="feedback-text"><strong>能有客户，说明你方向是对的。</strong></p>
-<p class="feedback-text">不稳定的原因通常只有一个——<span class="feedback-highlight">没有形成稳定的获客通道</span>。</p>
-<p class="feedback-text">你离"不愁客户"其实只差一步。</p>`,
-    weight: "system"
+    html: `<p class="feedback-text"><strong>有客户说明方向对了。</strong></p>
+<p class="feedback-text">不稳定的原因通常只有一个——<span class="feedback-highlight">还没形成稳定的获客通道</span>。</p>
+<p class="feedback-text">你离"不愁客户"其实只差一步。</p>`
   }
 };
 
-/* --- 互动2 选完后的反馈文案 --- */
+/* --- 互动2 反馈 --- */
 const feedbacks2 = {
   "self": {
-    html: `<p class="feedback-text">行，你是<strong>执行力型选手</strong>。<br/>给对方法你就能跑，那关键就是——<span class="feedback-highlight">方法别选错</span>。</p>`
+    html: `<p class="feedback-text"><strong>执行力不差，缺的就是正确方向。</strong><br/>方向对了，你能跑得很快。</p>`
   },
   "delegate": {
-    html: `<p class="feedback-text">懂，你的时间值钱，<strong>不该花在试错上</strong>。<br/>那关键就是——<span class="feedback-highlight">找对帮你做的人</span>。</p>`
+    html: `<p class="feedback-text"><strong>你的时间值钱，不该花在试错上。</strong><br/>关键是<span class="feedback-highlight">找对帮你做的人</span>。</p>`
   },
   "collab": {
-    html: `<p class="feedback-text">这是最聪明的方式——<strong>方向你把握，执行有人配合</strong>。<br/>关键就是<span class="feedback-highlight">配合模式得设计对</span>。</p>`
+    html: `<p class="feedback-text"><strong>方向你把握，执行有人配合——</strong>这是最聪明的方式。<br/>关键是<span class="feedback-highlight">配合模式得设计对</span>。</p>`
   }
 };
 
-/* --- 同行案例（按结果类型） --- */
+/* --- 同行案例 --- */
 const caseData = {
   ad: [
-    { industry: "家装", desc: "月均获客成本从 180 降到 47", time: "3周见效" },
-    { industry: "教培", desc: "首月新增 230+ 条有效线索", time: "投入 5000 起步" },
-    { industry: "本地餐饮", desc: "到店客户翻了一倍", time: "2周开始有客" }
+    { industry: "家装", desc: "获客成本从 180 降到 47", time: "3周见效" },
+    { industry: "教培", desc: "首月新增 230+ 有效线索", time: "5000 起步" },
+    { industry: "本地餐饮", desc: "到店客户翻了一倍", time: "2周有客" }
   ],
   agency: [
-    { industry: "医美", desc: "获客全程托管，老板只管接诊", time: "首月回本" },
-    { industry: "建材", desc: "团队帮跑后，线索质量明显提升", time: "第2周开始交付" },
-    { industry: "汽车服务", desc: "从0到稳定月获客200+", time: "合作3个月" }
+    { industry: "医美", desc: "全程托管，老板只管接诊", time: "首月回本" },
+    { industry: "建材", desc: "线索质量明显提升", time: "2周交付" },
+    { industry: "汽车服务", desc: "从0到月获客200+", time: "3个月" }
   ],
   content: [
-    { industry: "法律咨询", desc: "靠短视频3个月积累2000+精准粉丝", time: "第2月开始有稳定咨询" },
-    { industry: "财税", desc: "内容获客占比从10%提到60%", time: "坚持4个月后爆发" },
-    { industry: "母婴", desc: "一条爆款带来 500+ 咨询", time: "内容体系搭好后" }
+    { industry: "法律咨询", desc: "3个月积累2000+精准粉丝", time: "第2月有咨询" },
+    { industry: "财税", desc: "内容获客占比从10%提到60%", time: "4个月爆发" },
+    { industry: "母婴", desc: "一条爆款带来500+咨询", time: "体系搭好后" }
   ]
 };
 
-/* --- 信息缺口文案（按结果类型） --- */
+/* --- 信息缺口文案 --- */
 const gapTexts = {
-  ad: "具体怎么定向、预算怎么分配、素材怎么做，不同行业打法差别很大。",
-  agency: "找什么样的团队靠谱、怎么评估效果、合作模式怎么谈，里面门道不少。",
-  content: "做什么内容能吸引目标客户、怎么分发、怎么把看客变成询客，每一步都有讲究。"
+  ad: "具体怎么定向、预算怎么分配、素材怎么做，不同行业打法差别很大。做对了效果翻倍，做错了等于白花钱。",
+  agency: "找什么样的团队靠谱、怎么评估效果、合作模式怎么谈，里面门道不少。选错了不如不选。",
+  content: "做什么内容能吸引目标客户、怎么分发、怎么把看客变成询客，每一步都有讲究。盲目做内容等于白忙活。"
 };
 
-/* --- 结果页详细内容 --- */
+/* --- 结果页详情 --- */
 function getResultContent(type, choice1, choice2) {
   const reasons = {
     ad: {
-      "no-leads": "你现在最缺的就是客户来源。精准定向能帮你快速找到对的人，不用再干等",
-      "waste-money": "你之前花的钱不是白花——是方向对了但定向没做好。重新来，效果完全不同",
-      "unstable": "你已经有基础了，加一条稳定的精准获客通道，就不用再靠运气"
+      "no-leads": "你现在最缺的就是客户来源。精准定向能帮你快速找到对的人，不用再干等。",
+      "waste-money": "之前花钱没效果？不是方向错了，是定向没做好。重新来，结果完全不同。",
+      "unstable": "你已经有基础了。加一条稳定的精准获客通道，就不用再靠运气。"
     },
     agency: {
-      "no-leads": "与其自己从零摸索，不如让做过上百个案子的团队帮你快速上手",
-      "waste-money": "你踩过的坑，人家早有成熟方案。花同样的钱，效果可能翻几倍",
-      "unstable": "把获客交给专人负责，你的精力花在交付和管理上，整体效率更高"
+      "no-leads": "与其从零摸索，不如让做过上百个案子的团队帮你上手。少走弯路就是赚钱。",
+      "waste-money": "你踩过的坑，人家早有成熟方案。花同样的钱，效果可能翻几倍。",
+      "unstable": "获客交给专人负责，你的精力花在交付和管理上。效率完全不一样。"
     },
     content: {
-      "no-leads": "你的情况适合搭一套长期获客体系——前期投入时间，后面客户自己来",
-      "waste-money": "与其一直花钱买流量，不如搭好内容体系，让获客成本持续降低",
-      "unstable": "你有基础了，下一步是把内容、承接、转化串起来，形成稳定循环"
+      "no-leads": "适合搭一套长期获客体系——前期投入时间，后面客户自己来。",
+      "waste-money": "与其一直花钱买流量，不如搭好内容体系，让获客成本持续下降。",
+      "unstable": "你有基础了。下一步是把内容、承接、转化串起来，形成稳定循环。"
     }
   };
 
@@ -115,16 +112,16 @@ function getResultContent(type, choice1, choice2) {
       "先跑一轮测试期，效果好再长期合作"
     ],
     content: [
-      "前期投入精力，后期获客成本持续降低",
+      "前期投入精力，后期获客成本持续下降",
       choice2 === "collab" ? "你把控方向，团队帮你做执行和分发" : "体系搭好后，获客基本自动化",
       "内容 + 精准推广组合，效果可以叠加"
     ]
   };
 
   const how = {
-    ad: "按行业、地域、兴趣精准定向，让有需求的人看到你、主动来咨询。",
-    agency: "找到靠谱的执行团队，从方案到落地全程有人负责，你盯结果就行。",
-    content: "搭好内容体系和客户承接流程，让目标客户被内容吸引、主动找到你。"
+    ad: "按行业、地域、兴趣精准定向——让有需求的人看到你、主动来咨询。",
+    agency: "找到靠谱的执行团队——从方案到落地全程有人负责，你盯结果就行。",
+    content: "搭好内容体系和客户承接流程——让目标客户被内容吸引、主动找到你。"
   };
 
   const steps = {
@@ -273,38 +270,42 @@ function resolveType() {
 }
 
 function renderResult() {
-  const type = resolveType();
-  const profile = profiles[type];
-  const content = getResultContent(type, state.choices.q1, state.choices.q2);
+  try {
+    const type = resolveType();
+    const profile = profiles[type];
+    const content = getResultContent(type, state.choices.q1, state.choices.q2);
 
-  document.getElementById("result-emoji").textContent = profile.emoji;
-  document.getElementById("result-label").textContent = profile.label;
-  document.getElementById("result-title").textContent = profile.title;
-  document.getElementById("result-reason").textContent = content.reason;
-  document.getElementById("result-how").textContent = content.how;
-  document.getElementById("cta-scheme").textContent = profile.scheme;
+    document.getElementById("result-emoji").textContent = profile.emoji;
+    document.getElementById("result-label").textContent = profile.label;
+    document.getElementById("result-title").textContent = profile.title;
+    document.getElementById("result-reason").textContent = content.reason;
+    document.getElementById("result-how").textContent = content.how;
+    document.getElementById("cta-scheme").textContent = profile.scheme;
 
-  // 信息缺口
-  document.getElementById("gap-text").textContent = gapTexts[type] || "";
+    // 信息缺口
+    document.getElementById("gap-text").textContent = gapTexts[type] || "";
 
-  // 要点
-  const pointsEl = document.getElementById("result-points");
-  pointsEl.innerHTML = content.points.map(p => `<li>${p}</li>`).join("");
+    // 要点
+    const pointsEl = document.getElementById("result-points");
+    pointsEl.innerHTML = content.points.map(p => `<li>${p}</li>`).join("");
 
-  // 步骤
-  const stepsEl = document.getElementById("result-steps");
-  stepsEl.innerHTML = content.steps.map(s => `<li>${s}</li>`).join("");
+    // 步骤
+    const stepsEl = document.getElementById("result-steps");
+    stepsEl.innerHTML = content.steps.map(s => `<li>${s}</li>`).join("");
 
-  // 同行案例
-  const cases = caseData[type] || [];
-  const casesEl = document.getElementById("case-items");
-  casesEl.innerHTML = cases.map(c => `
-    <div class="case-item">
-      <span class="case-industry">${c.industry}</span>
-      <span class="case-desc">${c.desc}</span>
-      <span class="case-time">${c.time}</span>
-    </div>
-  `).join("");
+    // 同行案例
+    const cases = caseData[type] || [];
+    const casesEl = document.getElementById("case-items");
+    casesEl.innerHTML = cases.map(c => `
+      <div class="case-item">
+        <span class="case-industry">${c.industry}</span>
+        <span class="case-desc">${c.desc}</span>
+        <span class="case-time">${c.time}</span>
+      </div>
+    `).join("");
+  } catch (err) {
+    console.error("renderResult error:", err);
+  }
 }
 
 /* ===== Reset ===== */
