@@ -1,4 +1,4 @@
-/* ===== V4.4: 互动融入内容流 ===== */
+/* ===== V4.5: 内容逻辑重构 — 前文不亮三条路，互动承接论点 ===== */
 
 /* --- 结果数据 --- */
 const profiles = {
@@ -22,27 +22,24 @@ const profiles = {
   }
 };
 
-/* --- 互动1 反馈（融入文字流，像作者接话） --- */
+/* --- 互动1 反馈 --- */
 const feedbacks1 = {
   "no-leads": {
     html: `<div class="fade-in">
 <p class="body-text"><strong>没客户来——这是最多老板卡住的地方。</strong></p>
-<p class="body-text">不是你不行。是<span class="feedback-highlight">客户根本看不到你</span>。</p>
-<p class="body-text">方法一换，一周就能感觉到变化。</p>
+<p class="body-text">不是你不行。是<span class="feedback-highlight">客户根本看不到你</span>。解决这个问题，方法比努力重要。</p>
 </div>`
   },
   "waste-money": {
     html: `<div class="fade-in">
 <p class="body-text"><strong>花了钱没效果——比没花钱还让人窝火。</strong></p>
-<p class="body-text">但好消息是，你比那些还没开始的老板强——起码你知道<span class="feedback-highlight">哪些路走不通了</span>。</p>
-<p class="body-text">关键不是换方法，是<strong>换做法</strong>。</p>
+<p class="body-text">但好消息是，踩过坑说明你知道<span class="feedback-highlight">哪些路走不通了</span>。关键不是换方法，是换做法。</p>
 </div>`
   },
   "unstable": {
     html: `<div class="fade-in">
 <p class="body-text"><strong>有客户说明方向对了。</strong></p>
-<p class="body-text">不稳定的原因通常只有一个——<span class="feedback-highlight">还没形成稳定的获客通道</span>。</p>
-<p class="body-text">你离"不愁客户"其实只差一步。</p>
+<p class="body-text">不稳定说明还没形成<span class="feedback-highlight">稳定的获客通道</span>。你离"不愁客户"其实只差一步。</p>
 </div>`
   }
 };
@@ -61,7 +58,7 @@ const feedbacks2 = {
   },
   "collab": {
     html: `<div class="fade-in">
-<p class="body-text"><strong>方向你把握，执行有人配合——</strong>这是最聪明的方式。关键是<span class="feedback-highlight">配合模式得设计对</span>。</p>
+<p class="body-text"><strong>方向你把握，执行有人配合——</strong>这是效率最高的方式。关键是<span class="feedback-highlight">配合模式得设计对</span>。</p>
 </div>`
   }
 };
@@ -221,22 +218,15 @@ function showFeedback(group, value) {
     observeNewElements(feedbackEl);
 
     setTimeout(() => {
-      // 显示过渡段
-      const bridge = document.getElementById("sec-bridge");
-      bridge.classList.remove("hidden");
-      observeNewElements(bridge);
+      // 直接显示互动2，不再有独立过渡段
+      const interact2 = document.getElementById("interact-2-wrap");
+      interact2.classList.remove("hidden");
+      observeNewElements(interact2);
 
       setTimeout(() => {
-        // 显示互动2
-        const interact2 = document.getElementById("interact-2-wrap");
-        interact2.classList.remove("hidden");
-        observeNewElements(interact2);
-
-        setTimeout(() => {
-          interact2.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
-      }, 600);
-    }, 800);
+        interact2.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }, 1000);
   }
 
   if (group === 2) {
@@ -345,7 +335,7 @@ function resetAll() {
     el.innerHTML = "";
   });
 
-  ["sec-bridge", "interact-2-wrap", "sec-pre-result", "sec-result"].forEach(id => {
+  ["interact-2-wrap", "sec-pre-result", "sec-result"].forEach(id => {
     document.getElementById(id).classList.add("hidden");
   });
 
