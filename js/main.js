@@ -1,258 +1,286 @@
-/* ===== V6: 翻卡获客体检小游戏 ===== */
+/* ============================
+   朋友圈获客模拟器 v7
+   ============================ */
 
-const state = {
-  answers: {},       // { 1: score, 2: score, 3: score }
-  currentCard: 1,
-  totalCards: 3,
-  flippedCount: 0
-};
+(function () {
+  'use strict';
 
-/* --- 结果配置 --- */
-const resultMap = {
-  low: {
-    title: "🚨 你的获客急需体检",
-    desc: "你目前的获客方式效率偏低，还有很大提升空间。好消息是——已经有成熟的方法帮你快速改善。",
-    insight: "你现在的获客方式主要靠人脉和体力，天花板很低。建议先了解一下线上获客的基础打法，找到最适合你行业的切入点。"
-  },
-  mid: {
-    title: "⚠️ 你的获客还差临门一脚",
-    desc: "你已经有一定获客基础，但效率和精准度还不够。优化几个关键环节，效果可能翻倍。",
-    insight: "你不是没客户，而是获客成本偏高、线索不够精准。优化投放策略和转化链路是当前性价比最高的动作。"
-  },
-  high: {
-    title: "✅ 你的获客基础不错",
-    desc: "你在获客上已经走在前面了，但还有优化空间。看看同行在做什么，也许能给你新思路。",
-    insight: "你已经跑通了基础的获客链路，接下来应该关注降本增效。看看同行的最新打法，会有新启发。"
+  // ---- 行业数据 ----
+  const industries = [
+    { id: 'edu',      icon: '📚', name: '教育培训' },
+    { id: 'beauty',   icon: '💆', name: '美容美发' },
+    { id: 'food',     icon: '🍜', name: '餐饮美食' },
+    { id: 'home',     icon: '🏠', name: '家装建材' },
+    { id: 'auto',     icon: '🚗', name: '汽车服务' },
+    { id: 'health',   icon: '🏥', name: '大健康' },
+    { id: 'finance',  icon: '💰', name: '金融保险' },
+    { id: 'retail',   icon: '🛍️', name: '零售电商' },
+    { id: 'other',    icon: '🏢', name: '其他行业' },
+  ];
+
+  // ---- 目标选项 ----
+  const goals = [
+    { id: 'leads',   icon: '📞', text: '获取客户线索',   sub: '让更多人主动咨询你' },
+    { id: 'wechat',  icon: '💬', text: '引导加微信',     sub: '把客户沉淀到私域' },
+    { id: 'visit',   icon: '📍', text: '门店到客',       sub: '让附近的人到店消费' },
+    { id: 'brand',   icon: '📣', text: '品牌曝光',       sub: '让更多人知道你' },
+  ];
+
+  // ---- 行业广告模拟数据 ----
+  const adData = {
+    edu: {
+      brand: '某教育培训机构',
+      tag: '限时体验',
+      title: '孩子成绩上不去？试试这个方法',
+      desc: '已有 3,200+ 家长选择，首课免费体验',
+      img: 'linear-gradient(135deg,#667eea,#764ba2)',
+      exposure: '8,000~15,000',
+      click: '320~600',
+      cost: '¥25~55/人',
+    },
+    beauty: {
+      brand: '某美容连锁',
+      tag: '新客专享',
+      title: '素颜也能有好气色',
+      desc: '到店体验价 ¥68，限前 100 名',
+      img: 'linear-gradient(135deg,#f093fb,#f5576c)',
+      exposure: '6,000~12,000',
+      click: '240~480',
+      cost: '¥18~42/人',
+    },
+    food: {
+      brand: '某餐饮品牌',
+      tag: '霸王餐',
+      title: '这家店排队 2 小时，到底什么来头？',
+      desc: '新店开业，前 50 桌 5 折',
+      img: 'linear-gradient(135deg,#f6d365,#fda085)',
+      exposure: '10,000~20,000',
+      click: '500~900',
+      cost: '¥8~22/人',
+    },
+    home: {
+      brand: '某家装品牌',
+      tag: '0 元设计',
+      title: '装修怕踩坑？先看看这份避坑清单',
+      desc: '免费量房+3D效果图，已服务 5,000+ 业主',
+      img: 'linear-gradient(135deg,#a8edea,#fed6e3)',
+      exposure: '5,000~10,000',
+      click: '200~400',
+      cost: '¥45~90/人',
+    },
+    auto: {
+      brand: '某汽车服务',
+      tag: '到店礼',
+      title: '你的爱车该保养了',
+      desc: '进口全合成机油 ¥198 起，预约立减 50',
+      img: 'linear-gradient(135deg,#667eea,#764ba2)',
+      exposure: '5,000~9,000',
+      click: '200~360',
+      cost: '¥35~70/人',
+    },
+    health: {
+      brand: '某健康管理中心',
+      tag: '限时筛查',
+      title: '体检年年做，这些指标你真的看懂了？',
+      desc: '专业解读+个性化方案，限时免费',
+      img: 'linear-gradient(135deg,#89f7fe,#66a6ff)',
+      exposure: '6,000~11,000',
+      click: '240~440',
+      cost: '¥40~80/人',
+    },
+    finance: {
+      brand: '某金融服务',
+      tag: '专属顾问',
+      title: '闲钱放哪里更合适？',
+      desc: '1对1规划师，帮你做合理配置',
+      img: 'linear-gradient(135deg,#fbc2eb,#a6c1ee)',
+      exposure: '4,000~8,000',
+      click: '160~320',
+      cost: '¥60~120/人',
+    },
+    retail: {
+      brand: '某零售品牌',
+      tag: '爆款直降',
+      title: '这款好物被 10 万人加了购物车',
+      desc: '限时 3 天，直降 40%',
+      img: 'linear-gradient(135deg,#fa709a,#fee140)',
+      exposure: '12,000~25,000',
+      click: '600~1200',
+      cost: '¥10~30/人',
+    },
+    other: {
+      brand: '某本地商家',
+      tag: '限时活动',
+      title: '附近的人都在关注这家店',
+      desc: '新客福利领取中，名额有限',
+      img: 'linear-gradient(135deg,#a1c4fd,#c2e9fb)',
+      exposure: '5,000~10,000',
+      click: '200~400',
+      cost: '¥30~65/人',
+    },
+  };
+
+  // ---- State ----
+  let selectedIndustry = null;
+  let selectedGoal = null;
+
+  // ---- DOM Refs ----
+  const $ = (sel) => document.querySelector(sel);
+  const screens = {
+    hero:     $('#screen-hero'),
+    industry: $('#screen-industry'),
+    goal:     $('#screen-goal'),
+    loading:  $('#screen-loading'),
+    result:   $('#screen-result'),
+  };
+
+  // ---- Helper: switch screen ----
+  function showScreen(name) {
+    Object.values(screens).forEach(s => s.classList.remove('active'));
+    screens[name].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
-};
 
-const diagResults = {
-  1: { 1: { icon: "🔴", text: "待升级" }, 2: { icon: "🟡", text: "及格" }, 3: { icon: "🟢", text: "在线" } },
-  2: { 1: { icon: "🔴", text: "未投入" }, 2: { icon: "🟡", text: "试水中" }, 3: { icon: "🟢", text: "有计划" } },
-  3: { 1: { icon: "🔴", text: "待解决" }, 2: { icon: "🟡", text: "可优化" }, 3: { icon: "🟢", text: "可提升" } }
-};
+  // ---- Render industry grid ----
+  function renderIndustries() {
+    const grid = $('#industry-grid');
+    grid.innerHTML = industries.map(ind => `
+      <div class="opt" data-id="${ind.id}">
+        <span class="opt-icon">${ind.icon}</span>
+        <span class="opt-text">${ind.name}</span>
+      </div>
+    `).join('');
 
-/* ===== Screen Management ===== */
-function showScreen(id) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  const target = document.getElementById(id);
-  target.classList.add("active");
-  // 滚到顶
-  target.scrollTop = 0;
-  window.scrollTo(0, 0);
-}
-
-/* ===== Card Flip ===== */
-function flipCard(cardEl) {
-  if (cardEl.classList.contains("flipped")) return;
-  cardEl.classList.add("flipped");
-}
-
-/* ===== Handle Option Click ===== */
-function handleOption(btn) {
-  const cardIdx = parseInt(btn.dataset.card);
-  const score = parseInt(btn.dataset.score);
-
-  // 记录答案
-  state.answers[cardIdx] = score;
-  state.flippedCount++;
-
-  // 高亮选中
-  const cardEl = document.getElementById(`card-${cardIdx}`);
-  cardEl.querySelectorAll(".card-opt").forEach(b => {
-    if (b === btn) {
-      b.classList.add("chosen");
-    } else {
-      b.classList.add("unchosen");
-    }
-    b.disabled = true;
-  });
-
-  // 短暂延迟后进入下一张或出结果
-  setTimeout(() => {
-    if (state.flippedCount >= state.totalCards) {
-      // 全部翻完，出结果
-      showScreen("screen-result");
-      setTimeout(renderResult, 300);
-    } else {
-      // 下一张
-      state.currentCard++;
-      document.getElementById("card-num").textContent = state.currentCard;
-
-      // 当前卡片滑出
-      cardEl.classList.add("slide-out");
-
-      setTimeout(() => {
-        // 下一张卡片出现
-        const nextCard = document.getElementById(`card-${state.currentCard}`);
-        nextCard.classList.add("active");
-
-        // 更新 dots
-        document.querySelectorAll(".dot").forEach((d, i) => {
-          d.classList.toggle("active", i < state.currentCard);
-          d.classList.toggle("done", i < state.currentCard - 1);
-        });
-
-        // 自动翻开
-        setTimeout(() => flipCard(nextCard), 400);
-      }, 350);
-    }
-  }, 600);
-}
-
-/* ===== Render Result ===== */
-function renderResult() {
-  const total = (state.answers[1] || 1) + (state.answers[2] || 1) + (state.answers[3] || 1);
-  // 映射到 0-100 分 (3-9 => 25-92)
-  const score = Math.round(((total - 3) / 6) * 67 + 25);
-
-  let level = "low";
-  if (score >= 60) level = "mid";
-  if (score >= 78) level = "high";
-
-  const result = resultMap[level];
-
-  // 环形动画
-  animateScore(score);
-
-  // 文字
-  setTimeout(() => {
-    document.getElementById("result-title").textContent = result.title;
-    document.getElementById("result-title").classList.add("show");
-  }, 800);
-
-  setTimeout(() => {
-    document.getElementById("result-desc").textContent = result.desc;
-    document.getElementById("result-desc").classList.add("show");
-  }, 1200);
-
-  // 诊断项逐个显示
-  [1, 2, 3].forEach((cardIdx, i) => {
-    setTimeout(() => {
-      const s = state.answers[cardIdx] || 1;
-      const diag = diagResults[cardIdx][s];
-      document.getElementById(`diag-icon-${cardIdx}`).textContent = diag.icon;
-      document.getElementById(`diag-status-${cardIdx}`).textContent = diag.text;
-      document.getElementById(`diag-status-${cardIdx}`).className = `diag-status ds-${s}`;
-      document.querySelectorAll(".diag-item")[i].classList.add("show");
-    }, 1600 + i * 300);
-  });
-
-  // 顾问点评
-  setTimeout(() => {
-    document.getElementById("insight-text").textContent = result.insight;
-    document.querySelector(".insight-card").classList.add("show");
-  }, 2600);
-
-  // 同行数据
-  setTimeout(() => {
-    document.querySelector(".peer-card").classList.add("show");
-  }, 3000);
-
-  // CTA
-  setTimeout(() => {
-    document.querySelector(".cta-final").classList.add("show");
-  }, 3400);
-}
-
-/* ===== Score Ring Animation ===== */
-function animateScore(target) {
-  const circle = document.getElementById("ring-fill");
-  const valEl = document.getElementById("score-val");
-  const circumference = 2 * Math.PI * 52;
-  circle.style.strokeDasharray = circumference;
-  circle.style.strokeDashoffset = circumference;
-
-  // 颜色
-  let color = "#e8393e"; // red
-  if (target >= 60) color = "#f5a623"; // orange
-  if (target >= 78) color = "#1bbf83"; // green
-  circle.style.stroke = color;
-
-  // 动画
-  let current = 0;
-  const duration = 1200;
-  const start = performance.now();
-
-  function tick(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // ease out cubic
-    const eased = 1 - Math.pow(1 - progress, 3);
-    current = Math.round(eased * target);
-    valEl.textContent = current;
-    circle.style.strokeDashoffset = circumference * (1 - (eased * target) / 100);
-    if (progress < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-
-/* ===== Reset ===== */
-function resetAll() {
-  state.answers = {};
-  state.currentCard = 1;
-  state.flippedCount = 0;
-
-  // 重置卡片
-  document.querySelectorAll(".flip-card").forEach((card, i) => {
-    card.classList.remove("flipped", "active", "slide-out");
-    card.querySelectorAll(".card-opt").forEach(b => {
-      b.classList.remove("chosen", "unchosen");
-      b.disabled = false;
+    grid.addEventListener('click', (e) => {
+      const opt = e.target.closest('.opt');
+      if (!opt) return;
+      // highlight
+      grid.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      selectedIndustry = opt.dataset.id;
+      // auto advance after short delay
+      setTimeout(() => showScreen('goal'), 350);
     });
-  });
+  }
 
-  // 重置 dots
-  document.querySelectorAll(".dot").forEach((d, i) => {
-    d.classList.toggle("active", i === 0);
-    d.classList.remove("done");
-  });
+  // ---- Render goal list ----
+  function renderGoals() {
+    const list = $('#goal-list');
+    list.innerHTML = goals.map(g => `
+      <div class="opt" data-id="${g.id}">
+        <span class="opt-icon">${g.icon}</span>
+        <div class="opt-body">
+          <p class="opt-text">${g.text}</p>
+          <p class="opt-sub">${g.sub}</p>
+        </div>
+      </div>
+    `).join('');
 
-  document.getElementById("card-num").textContent = "1";
+    list.addEventListener('click', (e) => {
+      const opt = e.target.closest('.opt');
+      if (!opt) return;
+      list.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      selectedGoal = opt.dataset.id;
+      setTimeout(() => startLoading(), 350);
+    });
+  }
 
-  // 重置结果页
-  document.getElementById("result-title").className = "result-title";
-  document.getElementById("result-desc").className = "result-desc";
-  document.querySelectorAll(".diag-item").forEach(el => el.classList.remove("show"));
-  document.querySelector(".insight-card").classList.remove("show");
-  document.querySelector(".peer-card").classList.remove("show");
-  document.querySelector(".cta-final").classList.remove("show");
-  document.getElementById("score-val").textContent = "0";
+  // ---- Loading animation ----
+  function startLoading() {
+    showScreen('loading');
+    const fill = $('#loading-fill');
+    const tip = $('#loading-tip');
 
-  showScreen("screen-home");
-}
+    const tips = [
+      '匹配行业数据中...',
+      '分析同行投放策略...',
+      '生成广告素材预览...',
+      '计算预估效果数据...',
+    ];
 
-/* ===== Init ===== */
-function init() {
-  // 开始按钮
-  document.getElementById("btn-start").addEventListener("click", () => {
-    showScreen("screen-game");
-    // 第一张卡片延迟显示并翻开
-    const card1 = document.getElementById("card-1");
-    setTimeout(() => flipCard(card1), 500);
-  });
+    let progress = 0;
+    let tipIdx = 0;
 
-  // 卡片正面点击翻开
-  document.addEventListener("click", (e) => {
-    const front = e.target.closest(".flip-front");
-    if (front) {
-      const card = front.closest(".flip-card");
-      if (card && card.classList.contains("active")) {
-        flipCard(card);
+    const interval = setInterval(() => {
+      progress += Math.random() * 18 + 5;
+      if (progress > 95) progress = 95;
+      fill.style.width = progress + '%';
+
+      if (progress > (tipIdx + 1) * 25 && tipIdx < tips.length - 1) {
+        tipIdx++;
+        tip.textContent = tips[tipIdx];
       }
-    }
-  });
+    }, 300);
 
-  // 选项点击
-  document.addEventListener("click", (e) => {
-    const opt = e.target.closest(".card-opt");
-    if (opt && !opt.disabled) {
-      handleOption(opt);
-    }
-  });
+    setTimeout(() => {
+      clearInterval(interval);
+      fill.style.width = '100%';
+      setTimeout(() => showResult(), 300);
+    }, 2200);
+  }
 
-  // 重来
-  document.getElementById("btn-retry").addEventListener("click", resetAll);
-}
+  // ---- Show result ----
+  function showResult() {
+    const data = adData[selectedIndustry] || adData.other;
 
-init();
+    // Fill ad card
+    $('#ad-brand').textContent = data.brand;
+    $('#ad-tag').textContent = data.tag;
+    $('#ad-title').textContent = data.title;
+    $('#ad-desc').textContent = data.desc;
+    $('#ad-img').style.background = data.img;
+    $('#ad-img').style.backgroundSize = 'cover';
+
+    // Adjust button text based on goal
+    const btnTexts = {
+      leads: '立即咨询',
+      wechat: '添加好友',
+      visit: '导航到店',
+      brand: '了解更多',
+    };
+    $('#ad-btn').textContent = btnTexts[selectedGoal] || '了解更多';
+
+    // Fill data
+    $('#data-exposure').textContent = data.exposure;
+    $('#data-click').textContent = data.click;
+    $('#data-cost').textContent = data.cost;
+
+    showScreen('result');
+
+    // Animate data numbers
+    animateDataCards();
+  }
+
+  // ---- Animate data cards ----
+  function animateDataCards() {
+    const cards = document.querySelectorAll('.data-card');
+    cards.forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(16px)';
+      setTimeout(() => {
+        card.style.transition = 'all .5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 300 + i * 150);
+    });
+  }
+
+  // ---- Init ----
+  function init() {
+    renderIndustries();
+    renderGoals();
+
+    $('#btn-start').addEventListener('click', () => {
+      showScreen('industry');
+    });
+  }
+
+  // DOM Ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();

@@ -3,208 +3,210 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-  <title>你的生意获客体检</title>
-  <link rel="stylesheet" href="./css/style.css?v=7"/>
+  <title>朋友圈获客模拟器</title>
+  <link rel="stylesheet" href="css/style.css?v=8"/>
 </head>
 <body>
+  <div id="app">
 
-<div class="app" id="app">
-
-  <!-- ====== SCREEN 1: 首屏 ====== -->
-  <div class="screen active" id="screen-home">
-    <div class="home-content">
-      <div class="home-badge">🔍 2分钟获客体检</div>
-      <h1 class="home-title">你在微信找客户<br/>能打几分？</h1>
-      <p class="home-sub">翻开 3 张卡，测测你的获客健康度</p>
-      <button class="btn-start" id="btn-start">
-        <span>开始体检</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <p class="home-count">已有 <strong>5,280</strong> 位老板参与</p>
-    </div>
-    <div class="home-cards-preview">
-      <div class="preview-card pc-1">?</div>
-      <div class="preview-card pc-2">?</div>
-      <div class="preview-card pc-3">?</div>
-    </div>
-  </div>
-
-  <!-- ====== SCREEN 2: 翻卡游戏 ====== -->
-  <div class="screen" id="screen-game">
-    <div class="game-header">
-      <p class="game-progress">第 <span id="card-num">1</span> / 3 张</p>
-      <div class="progress-dots">
-        <span class="dot active" id="dot-1"></span>
-        <span class="dot" id="dot-2"></span>
-        <span class="dot" id="dot-3"></span>
+    <!-- ========== 首屏 ========== -->
+    <section id="screen-hero" class="screen active">
+      <div class="hero-bg">
+        <div class="hero-float-circle c1"></div>
+        <div class="hero-float-circle c2"></div>
+        <div class="hero-float-circle c3"></div>
       </div>
-    </div>
+      <div class="hero-content">
+        <div class="hero-badge">⚡ 30 秒模拟体验</div>
+        <h1 class="hero-title">你的生意投朋友圈<br/>会是什么效果？</h1>
+        <p class="hero-sub">选两步，直接帮你生成一条<br/>属于你行业的朋友圈广告预览</p>
+        <button class="btn-primary btn-glow" id="btn-start">
+          立即体验
+          <span class="btn-arrow">→</span>
+        </button>
+        <div class="hero-trust">
+          <span class="trust-dot"></span>
+          已有 <strong>12,846</strong> 位老板体验过
+        </div>
+      </div>
+    </section>
 
-    <div class="game-area" id="game-area">
-      <!-- Card 1 -->
-      <div class="flip-card active" id="card-1" data-index="1">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="card-front-icon">🎯</div>
-            <p class="card-front-label">获客渠道</p>
-            <p class="card-front-hint">点击翻开</p>
-          </div>
-          <div class="flip-back">
-            <p class="card-q">你目前主要靠什么找客户？</p>
-            <div class="card-options">
-              <button class="card-opt" data-card="1" data-score="1">
-                <span class="opt-emoji">📱</span> 朋友圈、社群
-              </button>
-              <button class="card-opt" data-card="1" data-score="2">
-                <span class="opt-emoji">📞</span> 电话、转介绍
-              </button>
-              <button class="card-opt" data-card="1" data-score="3">
-                <span class="opt-emoji">📢</span> 已在线上投广告
-              </button>
+    <!-- ========== 第1步：选行业 ========== -->
+    <section id="screen-industry" class="screen">
+      <div class="step-header">
+        <div class="step-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+        </div>
+        <p class="step-label">你是做什么行业的？</p>
+      </div>
+      <div class="option-grid" id="industry-grid">
+        <!-- JS 渲染 -->
+      </div>
+    </section>
+
+    <!-- ========== 第2步：选目标 ========== -->
+    <section id="screen-goal" class="screen">
+      <div class="step-header">
+        <div class="step-dots">
+          <span class="dot done"></span>
+          <span class="dot active"></span>
+        </div>
+        <p class="step-label">你最想达到什么效果？</p>
+      </div>
+      <div class="option-list" id="goal-list">
+        <!-- JS 渲染 -->
+      </div>
+    </section>
+
+    <!-- ========== 加载中 ========== -->
+    <section id="screen-loading" class="screen">
+      <div class="loading-wrap">
+        <div class="loading-phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="scan-line"></div>
             </div>
           </div>
         </div>
+        <div class="loading-text">
+          <p class="loading-title">正在生成你的朋友圈广告预览...</p>
+          <p class="loading-sub" id="loading-tip">匹配行业数据中</p>
+          <div class="loading-bar">
+            <div class="loading-fill" id="loading-fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 结果：模拟朋友圈 ========== -->
+    <section id="screen-result" class="screen">
+      <!-- 模拟朋友圈 header -->
+      <div class="wx-header">
+        <span class="wx-back">‹</span>
+        <span class="wx-title">朋友圈</span>
+        <span class="wx-camera">📷</span>
       </div>
 
-      <!-- Card 2 -->
-      <div class="flip-card" id="card-2" data-index="2">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="card-front-icon">💰</div>
-            <p class="card-front-label">投入意愿</p>
-            <p class="card-front-hint">点击翻开</p>
+      <!-- 模拟朋友圈 feed -->
+      <div class="wx-feed">
+        <!-- 上方一条普通朋友圈（装饰） -->
+        <div class="wx-post wx-post-normal">
+          <div class="wx-avatar wx-avatar-fake"></div>
+          <div class="wx-post-body">
+            <p class="wx-name">小林</p>
+            <p class="wx-text">周末加班做方案…☕</p>
+            <p class="wx-time">2小时前</p>
           </div>
-          <div class="flip-back">
-            <p class="card-q">你愿意花多少钱来获客？</p>
-            <div class="card-options">
-              <button class="card-opt" data-card="2" data-score="1">
-                <span class="opt-emoji">🆓</span> 最好不花钱
-              </button>
-              <button class="card-opt" data-card="2" data-score="2">
-                <span class="opt-emoji">💵</span> 几千块试试水
-              </button>
-              <button class="card-opt" data-card="2" data-score="3">
-                <span class="opt-emoji">💎</span> 有预算，看效果
-              </button>
+        </div>
+
+        <!-- 广告 post -->
+        <div class="wx-post wx-post-ad" id="ad-post">
+          <div class="wx-avatar wx-avatar-ad">广</div>
+          <div class="wx-post-body">
+            <p class="wx-name wx-name-ad" id="ad-brand"><!-- JS --></p>
+            <div class="wx-ad-card" id="ad-card">
+              <div class="wx-ad-img" id="ad-img">
+                <div class="ad-img-overlay">
+                  <span class="ad-tag" id="ad-tag"><!-- JS --></span>
+                </div>
+              </div>
+              <div class="wx-ad-info">
+                <p class="wx-ad-title" id="ad-title"><!-- JS --></p>
+                <p class="wx-ad-desc" id="ad-desc"><!-- JS --></p>
+                <span class="wx-ad-btn" id="ad-btn">了解更多</span>
+              </div>
+            </div>
+            <div class="wx-ad-meta">
+              <span class="wx-time">刚刚</span>
+              <span class="wx-ad-label">广告</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Card 3 -->
-      <div class="flip-card" id="card-3" data-index="3">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="card-front-icon">⚡</div>
-            <p class="card-front-label">获客瓶颈</p>
-            <p class="card-front-hint">点击翻开</p>
-          </div>
-          <div class="flip-back">
-            <p class="card-q">你最头疼的问题是？</p>
-            <div class="card-options">
-              <button class="card-opt" data-card="3" data-score="1">
-                <span class="opt-emoji">👻</span> 根本没人来
-              </button>
-              <button class="card-opt" data-card="3" data-score="2">
-                <span class="opt-emoji">🗑️</span> 来的都不精准
-              </button>
-              <button class="card-opt" data-card="3" data-score="3">
-                <span class="opt-emoji">🔄</span> 有客户但留不住
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== SCREEN 3: 结果 + 加微 ====== -->
-  <div class="screen" id="screen-result">
-    <div class="result-content">
-
-      <!-- 评分动画 -->
-      <div class="score-ring-wrap">
-        <div class="score-ring" id="score-ring">
-          <svg viewBox="0 0 120 120">
-            <circle class="ring-bg" cx="60" cy="60" r="52"/>
-            <circle class="ring-fill" cx="60" cy="60" r="52" id="ring-fill"/>
-          </svg>
-          <div class="score-number">
-            <span class="score-val" id="score-val">0</span>
-            <span class="score-unit">分</span>
+        <!-- 下方一条朋友圈（装饰） -->
+        <div class="wx-post wx-post-normal">
+          <div class="wx-avatar wx-avatar-fake2"></div>
+          <div class="wx-post-body">
+            <p class="wx-name">大伟</p>
+            <p class="wx-text">搬砖人的午餐 🍜</p>
+            <p class="wx-time">3小时前</p>
           </div>
         </div>
       </div>
 
-      <h2 class="result-title" id="result-title">正在生成报告…</h2>
-      <p class="result-desc" id="result-desc"></p>
+      <!-- 分隔：这条广告的效果 -->
+      <div class="result-divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">👆 这就是你的广告在朋友圈的样子</span>
+        <div class="divider-line"></div>
+      </div>
 
-      <!-- 3个诊断项 -->
-      <div class="diag-list" id="diag-list">
-        <div class="diag-item">
-          <span class="diag-icon" id="diag-icon-1">—</span>
-          <span class="diag-label">获客渠道</span>
-          <span class="diag-status" id="diag-status-1">—</span>
+      <!-- 数据面板 -->
+      <div class="data-panel">
+        <h3 class="panel-title">你的行业投放效果参考</h3>
+        <div class="data-cards">
+          <div class="data-card">
+            <div class="data-num" id="data-exposure">--</div>
+            <div class="data-label">预估单日曝光</div>
+          </div>
+          <div class="data-card">
+            <div class="data-num" id="data-click">--</div>
+            <div class="data-label">预估点击量</div>
+          </div>
+          <div class="data-card">
+            <div class="data-num" id="data-cost">--</div>
+            <div class="data-label">同行获客成本</div>
+          </div>
         </div>
-        <div class="diag-item">
-          <span class="diag-icon" id="diag-icon-2">—</span>
-          <span class="diag-label">投入匹配</span>
-          <span class="diag-status" id="diag-status-2">—</span>
-        </div>
-        <div class="diag-item">
-          <span class="diag-icon" id="diag-icon-3">—</span>
-          <span class="diag-label">转化能力</span>
-          <span class="diag-status" id="diag-status-3">—</span>
-        </div>
+        <p class="data-note">* 数据基于同行业近 30 天投放均值</p>
       </div>
 
       <!-- 信息缺口 -->
-      <div class="insight-card">
-        <p class="insight-title">💡 顾问点评</p>
-        <p class="insight-text" id="insight-text">加载中…</p>
-      </div>
-
-      <!-- 同行数据 -->
-      <div class="peer-card">
-        <p class="peer-title">📊 同行都在怎么做</p>
-        <div class="peer-items">
-          <div class="peer-row">
-            <span class="peer-label">你的同行</span>
-            <span class="peer-bar"><span class="peer-fill" style="width:72%"></span></span>
-            <span class="peer-pct">72% 已在线上获客</span>
+      <div class="gap-section">
+        <div class="gap-card">
+          <div class="gap-icon">📊</div>
+          <div class="gap-body">
+            <p class="gap-title">想知道更详细的数据？</p>
+            <p class="gap-desc">你的行业有多少同行在投？平均投多少钱？哪种素材点击率最高？</p>
           </div>
-          <div class="peer-row">
-            <span class="peer-label">平均获客成本</span>
-            <span class="peer-val-big">¥38-85 <small>/条线索</small></span>
+        </div>
+        <div class="gap-card">
+          <div class="gap-icon">📋</div>
+          <div class="gap-body">
+            <p class="gap-title">想要一份完整的投放方案？</p>
+            <p class="gap-desc">包含预算分配、投放策略、素材方向建议，直接可以照着做</p>
           </div>
         </div>
       </div>
 
-      <!-- CTA -->
-      <div class="cta-final">
-        <p class="cta-hook">想看完整报告？<br/>你的行业具体数据 + 获客建议</p>
-        <div class="qr-box">
-          <div class="qr-placeholder">
-            <p>企业微信二维码</p>
+      <!-- 加微 CTA -->
+      <div class="cta-section">
+        <div class="cta-box">
+          <p class="cta-title">🎁 免费领取你的行业获客方案</p>
+          <p class="cta-desc">含同行投放数据 + 预算建议 + 素材参考</p>
+          <div class="cta-qr">
+            <div class="qr-placeholder">
+              <span>顾问二维码</span>
+            </div>
           </div>
-          <p class="qr-label">扫码加顾问 · <strong>免费领完整报告</strong></p>
-        </div>
-        <div class="cta-tags">
-          <span class="cta-tag">✓ 你的行业获客成本</span>
-          <span class="cta-tag">✓ 同行成功案例</span>
-          <span class="cta-tag">✓ 第一步怎么开始</span>
-        </div>
-        <div class="social-proof-mini">
-          <p>📈 本周 <strong>326</strong> 位老板已领取</p>
+          <p class="cta-hint">长按识别 · 免费领取 · 限时 200 份</p>
+          <div class="cta-social">
+            <span class="cta-social-dot"></span>
+            今日已有 <strong>47</strong> 位老板领取
+          </div>
         </div>
       </div>
 
-      <button class="btn-retry" id="btn-retry">重新体检 ↺</button>
-    </div>
+      <!-- 底部 -->
+      <div class="footer">
+        <p>本页面仅供体验参考，数据来源于行业公开信息</p>
+      </div>
+    </section>
+
   </div>
 
-</div>
-
-<script src="./js/main.js?v=7"></script>
+  <script src="js/main.js?v=8"></script>
 </body>
 </html>
