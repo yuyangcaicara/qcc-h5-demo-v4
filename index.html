@@ -3,247 +3,208 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-  <title>在微信找客户，大多数人第一步就错了</title>
-  <link rel="stylesheet" href="./css/style.css?v=6"/>
+  <title>你的生意获客体检</title>
+  <link rel="stylesheet" href="./css/style.css?v=7"/>
 </head>
 <body>
 
-<div class="page-wrap">
+<div class="app" id="app">
 
-  <!-- ====== HERO ====== -->
-  <section class="hero">
-    <p class="hero-tag">🔥 10,000+ 老板看完直呼"早该知道"</p>
-    <h1 class="hero-title">在微信找客户<br/>大多数人<span class="highlight-red">第一步就做错了</span></h1>
-    <p class="hero-sub">不是你不够努力。是方法不对。</p>
-    <div class="scroll-hint">
-      <span>往下看，你就明白了</span>
-      <div class="scroll-arrow">↓</div>
+  <!-- ====== SCREEN 1: 首屏 ====== -->
+  <div class="screen active" id="screen-home">
+    <div class="home-content">
+      <div class="home-badge">🔍 2分钟获客体检</div>
+      <h1 class="home-title">你在微信找客户<br/>能打几分？</h1>
+      <p class="home-sub">翻开 3 张卡，测测你的获客健康度</p>
+      <button class="btn-start" id="btn-start">
+        <span>开始体检</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <p class="home-count">已有 <strong>5,280</strong> 位老板参与</p>
     </div>
-  </section>
-
-  <!-- ====== 内容流 ====== -->
-  <section class="content-section" id="sec-main">
-
-    <!-- S1: 唤醒 -->
-    <div class="content-block fade-in">
-      <p class="big-text">你有没有想过一个问题——</p>
-      <p class="body-text accent-text">为什么你每天都在发朋友圈、加群、聊客户，<br/><strong>客户还是不找你？</strong></p>
+    <div class="home-cards-preview">
+      <div class="preview-card pc-1">?</div>
+      <div class="preview-card pc-2">?</div>
+      <div class="preview-card pc-3">?</div>
     </div>
+  </div>
 
-    <div class="content-block fade-in">
-      <p class="body-text">而你身边总有那么一两个人，<br/>看起来没你努力，<strong>生意却比你好。</strong></p>
-    </div>
-
-    <div class="content-block fade-in">
-      <p class="big-text">答案很扎心：</p>
-      <p class="body-text"><strong>不是你不行，是你在用错误的方式死磕。</strong></p>
-    </div>
-
-    <!-- S2: 痛点 —— 让用户对号入座 -->
-    <div class="content-block fade-in">
-      <p class="divider-text">———</p>
-      <p class="big-text accent">说个你可能不愿意承认的事。</p>
-    </div>
-
-    <div class="content-block fade-in">
-      <div class="pain-card">
-        <p class="pain-item">😩 朋友圈发了100条，来咨询的 <strong>0个</strong></p>
-        <p class="pain-item">💸 花了2万投广告，加来一堆 <strong>薅羊毛的</strong></p>
-        <p class="pain-item">📞 每天打50个电话，接通后说的第一句就被 <strong>挂掉</strong></p>
+  <!-- ====== SCREEN 2: 翻卡游戏 ====== -->
+  <div class="screen" id="screen-game">
+    <div class="game-header">
+      <p class="game-progress">第 <span id="card-num">1</span> / 3 张</p>
+      <div class="progress-dots">
+        <span class="dot active" id="dot-1"></span>
+        <span class="dot" id="dot-2"></span>
+        <span class="dot" id="dot-3"></span>
       </div>
     </div>
 
-    <div class="content-block fade-in">
-      <p class="body-text">这些问题的本质都一样——</p>
-      <p class="big-text"><strong>一上来就推销，等于过滤掉90%的潜在客户。</strong></p>
-    </div>
-
-    <!-- S3: 翻转 —— 卖问题不是卖产品 -->
-    <div class="content-block fade-in">
-      <p class="divider-text">———</p>
-      <p class="big-text accent">那些不缺客户的老板，到底在做什么？</p>
-    </div>
-
-    <div class="content-block fade-in">
-      <p class="body-text"><strong>他们不卖产品，卖的是问题。</strong></p>
-      <p class="body-text">先让客户意识到自己有问题、有痛点——<br/>然后自然而然地给出解决方案。</p>
-      <p class="body-text">从"随便看看"变成"我需要"。<br/><strong>这才是线上获客的核心逻辑。</strong></p>
-    </div>
-
-    <!-- S4: 认知深化 —— 五层内容成交 -->
-    <div class="content-block fade-in">
-      <p class="big-text">具体怎么做？<br/>有一套验证过的方法——</p>
-    </div>
-
-    <div class="content-block fade-in">
-      <div class="method-card">
-        <p class="method-title">📐 五层内容成交路径</p>
-        <div class="method-steps">
-          <div class="method-step">
-            <span class="method-num">1</span>
-            <div class="method-body">
-              <p class="method-name">唤醒需求</p>
-              <p class="method-desc">让客户意识到"我有这个问题"</p>
+    <div class="game-area" id="game-area">
+      <!-- Card 1 -->
+      <div class="flip-card active" id="card-1" data-index="1">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="card-front-icon">🎯</div>
+            <p class="card-front-label">获客渠道</p>
+            <p class="card-front-hint">点击翻开</p>
+          </div>
+          <div class="flip-back">
+            <p class="card-q">你目前主要靠什么找客户？</p>
+            <div class="card-options">
+              <button class="card-opt" data-card="1" data-score="1">
+                <span class="opt-emoji">📱</span> 朋友圈、社群
+              </button>
+              <button class="card-opt" data-card="1" data-score="2">
+                <span class="opt-emoji">📞</span> 电话、转介绍
+              </button>
+              <button class="card-opt" data-card="1" data-score="3">
+                <span class="opt-emoji">📢</span> 已在线上投广告
+              </button>
             </div>
           </div>
-          <div class="method-step">
-            <span class="method-num">2</span>
-            <div class="method-body">
-              <p class="method-name">给出方法</p>
-              <p class="method-desc">让客户看到"原来可以这样解决"</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="flip-card" id="card-2" data-index="2">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="card-front-icon">💰</div>
+            <p class="card-front-label">投入意愿</p>
+            <p class="card-front-hint">点击翻开</p>
+          </div>
+          <div class="flip-back">
+            <p class="card-q">你愿意花多少钱来获客？</p>
+            <div class="card-options">
+              <button class="card-opt" data-card="2" data-score="1">
+                <span class="opt-emoji">🆓</span> 最好不花钱
+              </button>
+              <button class="card-opt" data-card="2" data-score="2">
+                <span class="opt-emoji">💵</span> 几千块试试水
+              </button>
+              <button class="card-opt" data-card="2" data-score="3">
+                <span class="opt-emoji">💎</span> 有预算，看效果
+              </button>
             </div>
           </div>
-          <div class="method-step">
-            <span class="method-num">3</span>
-            <div class="method-body">
-              <p class="method-name">案例证明</p>
-              <p class="method-desc">让客户相信"别人已经做到了"</p>
-            </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="flip-card" id="card-3" data-index="3">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="card-front-icon">⚡</div>
+            <p class="card-front-label">获客瓶颈</p>
+            <p class="card-front-hint">点击翻开</p>
           </div>
-          <div class="method-step">
-            <span class="method-num">4</span>
-            <div class="method-body">
-              <p class="method-name">打消顾虑</p>
-              <p class="method-desc">让客户放下"我怕被坑"的防备</p>
-            </div>
-          </div>
-          <div class="method-step">
-            <span class="method-num">5</span>
-            <div class="method-body">
-              <p class="method-name">行动催化</p>
-              <p class="method-desc">让客户迈出第一步——主动来找你</p>
+          <div class="flip-back">
+            <p class="card-q">你最头疼的问题是？</p>
+            <div class="card-options">
+              <button class="card-opt" data-card="3" data-score="1">
+                <span class="opt-emoji">👻</span> 根本没人来
+              </button>
+              <button class="card-opt" data-card="3" data-score="2">
+                <span class="opt-emoji">🗑️</span> 来的都不精准
+              </button>
+              <button class="card-opt" data-card="3" data-score="3">
+                <span class="opt-emoji">🔄</span> 有客户但留不住
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-block fade-in">
-      <p class="body-text"><strong>走通这5步的老板，几乎不愁客户。</strong></p>
-      <p class="body-text">但大多数人卡在第一步——<br/>要么不知道怎么唤醒，要么唤醒了不会承接。</p>
-    </div>
+  <!-- ====== SCREEN 3: 结果 + 加微 ====== -->
+  <div class="screen" id="screen-result">
+    <div class="result-content">
 
-    <!-- S5: 钩子——你现在卡在哪 -->
-    <div class="content-block fade-in">
-      <p class="divider-text">———</p>
-      <p class="big-text">你呢？</p>
-      <p class="body-text"><strong>你发的内容，客户一般什么反应？</strong></p>
-      <p class="body-text text-hint">（选一个最接近的，看看你卡在哪一步）</p>
-    </div>
-
-    <!-- 互动：对号入座 -->
-    <div class="content-block" id="interact-1">
-      <div class="inline-options" id="options-1">
-        <button class="inline-opt fade-in" data-group="1" data-value="no-reach">
-          <span class="opt-marker">①</span>
-          <span class="opt-body">
-            <span class="opt-main">基本没人看，更没人问</span>
-            <span class="opt-sub">发了也白发，感觉在自嗨</span>
-          </span>
-        </button>
-        <button class="inline-opt fade-in" data-group="1" data-value="price-only">
-          <span class="opt-marker">②</span>
-          <span class="opt-body">
-            <span class="opt-main">有人问，但上来就问价，然后就没了</span>
-            <span class="opt-sub">留不住人，聊不下去</span>
-          </span>
-        </button>
-        <button class="inline-opt fade-in" data-group="1" data-value="unstable">
-          <span class="opt-marker">③</span>
-          <span class="opt-body">
-            <span class="opt-main">偶尔来一个，但不稳定</span>
-            <span class="opt-sub">不知道为什么来的，也不知道怎么复制</span>
-          </span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 互动反馈 -->
-    <div class="content-block hidden" id="feedback-1"></div>
-
-    <!-- 互动后：认知收束 + 加微引导 -->
-    <div class="content-block hidden" id="sec-bridge">
-      <div class="fade-in">
-        <p class="divider-text">———</p>
-        <p class="big-text">好消息是——</p>
-        <p class="body-text"><strong>知道卡在哪，就离走通不远了。</strong></p>
-        <p class="body-text">这套方法不是空想出来的。<br/>过去一年，<strong>已经帮上千个老板跑通了获客闭环。</strong></p>
-      </div>
-    </div>
-
-    <!-- 同行案例 -->
-    <div class="content-block hidden" id="sec-cases">
-      <div class="case-card fade-in">
-        <p class="case-title">📊 和你情况类似的老板，已经跑出了结果</p>
-        <div class="case-items">
-          <div class="case-item">
-            <span class="case-industry">家装</span>
-            <span class="case-desc">获客成本从 180 降到 47</span>
-            <span class="case-time">3周见效</span>
-          </div>
-          <div class="case-item">
-            <span class="case-industry">教培</span>
-            <span class="case-desc">首月新增 230+ 有效线索</span>
-            <span class="case-time">5000 起步</span>
-          </div>
-          <div class="case-item">
-            <span class="case-industry">医美</span>
-            <span class="case-desc">到店客户翻了一倍</span>
-            <span class="case-time">2周有客</span>
-          </div>
-          <div class="case-item">
-            <span class="case-industry">建材</span>
-            <span class="case-desc">线索质量提升后转化率翻3倍</span>
-            <span class="case-time">首月回本</span>
+      <!-- 评分动画 -->
+      <div class="score-ring-wrap">
+        <div class="score-ring" id="score-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" cx="60" cy="60" r="52" id="ring-fill"/>
+          </svg>
+          <div class="score-number">
+            <span class="score-val" id="score-val">0</span>
+            <span class="score-unit">分</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 信息缺口：引出加微 -->
-    <div class="content-block hidden" id="sec-gap">
-      <div class="info-gap-card fade-in">
-        <p class="gap-title">⚠️ 但这里有个关键——</p>
-        <p class="gap-text">不同行业、不同生意模式，获客方法差别很大。</p>
-        <p class="gap-text"><strong>别人的经验直接抄，大概率水土不服。</strong></p>
-        <p class="gap-text gap-cta">所以我们建议你——<br/><strong>先看看你的行业，应该怎么做。</strong></p>
+      <h2 class="result-title" id="result-title">正在生成报告…</h2>
+      <p class="result-desc" id="result-desc"></p>
+
+      <!-- 3个诊断项 -->
+      <div class="diag-list" id="diag-list">
+        <div class="diag-item">
+          <span class="diag-icon" id="diag-icon-1">—</span>
+          <span class="diag-label">获客渠道</span>
+          <span class="diag-status" id="diag-status-1">—</span>
+        </div>
+        <div class="diag-item">
+          <span class="diag-icon" id="diag-icon-2">—</span>
+          <span class="diag-label">投入匹配</span>
+          <span class="diag-status" id="diag-status-2">—</span>
+        </div>
+        <div class="diag-item">
+          <span class="diag-icon" id="diag-icon-3">—</span>
+          <span class="diag-label">转化能力</span>
+          <span class="diag-status" id="diag-status-3">—</span>
+        </div>
       </div>
-    </div>
 
-  </section>
+      <!-- 信息缺口 -->
+      <div class="insight-card">
+        <p class="insight-title">💡 顾问点评</p>
+        <p class="insight-text" id="insight-text">加载中…</p>
+      </div>
 
-  <!-- ====== 加微 CTA ====== -->
-  <section class="cta-section hidden" id="sec-cta">
-    <div class="result-cta fade-in">
-      <div class="cta-box">
-        <p class="cta-label">🎁 限量福利</p>
-        <p class="cta-title">免费帮你做一份<br/><strong>专属获客方案</strong></p>
-        <div class="cta-includes">
-          <span class="cta-tag">✓ 你的行业获客路径怎么走</span>
-          <span class="cta-tag">✓ 同行真实投入和效果数据</span>
-          <span class="cta-tag">✓ 第一步具体怎么开始</span>
-        </div>
-        <div class="qr-placeholder">
-          <p>企业微信二维码</p>
-          <p class="qr-hint">扫码加顾问 · 免费领取</p>
-        </div>
-        <div class="social-proof">
-          <p class="proof-stat">📈 本周已有 <strong>326</strong> 位老板领取</p>
-          <div class="proof-quotes">
-            <p class="proof-quote">"看完方案才发现之前的钱都白花了" —— 建材 张总</p>
-            <p class="proof-quote">"比我自己摸索半年学到的还多" —— 教培 李老师</p>
+      <!-- 同行数据 -->
+      <div class="peer-card">
+        <p class="peer-title">📊 同行都在怎么做</p>
+        <div class="peer-items">
+          <div class="peer-row">
+            <span class="peer-label">你的同行</span>
+            <span class="peer-bar"><span class="peer-fill" style="width:72%"></span></span>
+            <span class="peer-pct">72% 已在线上获客</span>
+          </div>
+          <div class="peer-row">
+            <span class="peer-label">平均获客成本</span>
+            <span class="peer-val-big">¥38-85 <small>/条线索</small></span>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="restart-area fade-in">
-      <button class="restart-btn" id="btn-restart">重新看看 ↺</button>
+      <!-- CTA -->
+      <div class="cta-final">
+        <p class="cta-hook">想看完整报告？<br/>你的行业具体数据 + 获客建议</p>
+        <div class="qr-box">
+          <div class="qr-placeholder">
+            <p>企业微信二维码</p>
+          </div>
+          <p class="qr-label">扫码加顾问 · <strong>免费领完整报告</strong></p>
+        </div>
+        <div class="cta-tags">
+          <span class="cta-tag">✓ 你的行业获客成本</span>
+          <span class="cta-tag">✓ 同行成功案例</span>
+          <span class="cta-tag">✓ 第一步怎么开始</span>
+        </div>
+        <div class="social-proof-mini">
+          <p>📈 本周 <strong>326</strong> 位老板已领取</p>
+        </div>
+      </div>
+
+      <button class="btn-retry" id="btn-retry">重新体检 ↺</button>
     </div>
-  </section>
+  </div>
 
 </div>
 
-<script src="./js/main.js?v=6"></script>
+<script src="./js/main.js?v=7"></script>
 </body>
 </html>
