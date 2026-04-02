@@ -199,42 +199,68 @@ body {
   font-weight: 700;
 }
 
-/* ===== Three Paths Cards ===== */
-.three-paths {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.path-card {
-  flex: 1;
+/* ===== Method Card (五层成交路径) ===== */
+.method-card {
   background: var(--card-bg);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 14px;
-  padding: 18px 12px;
-  text-align: center;
+  border-radius: var(--radius);
+  padding: 24px 20px;
   box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.04);
 }
 
-.path-emoji {
-  font-size: 28px;
-  display: block;
-  margin-bottom: 8px;
+.method-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text);
 }
 
-.path-name {
+.method-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.method-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.method-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--green-deep));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.method-body {
+  flex: 1;
+}
+
+.method-name {
   font-size: 15px;
   font-weight: 700;
-  margin-bottom: 6px;
+  color: var(--text);
+  margin-bottom: 2px;
+  line-height: 1.5;
 }
 
-.path-desc {
-  font-size: 12px;
+.method-desc {
+  font-size: 13px;
   color: var(--text-soft);
   line-height: 1.6;
 }
 
-/* ===== Inline Options (融入内容流的互动) ===== */
+/* ===== Inline Options (互动选项) ===== */
 .inline-options {
   display: flex;
   flex-direction: column;
@@ -330,155 +356,12 @@ body {
   border-color: transparent;
 }
 
-/* ===== Inline Feedback (融入文字流) ===== */
-.inline-feedback {
-  padding: 0;
-}
-
-.feedback-text {
-  font-size: 16px;
-  line-height: 1.9;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-
-.feedback-text strong {
-  color: var(--green-deep);
-  font-weight: 700;
-}
-
+/* ===== Inline Feedback ===== */
 .feedback-highlight {
   display: inline-block;
   background: linear-gradient(180deg, transparent 60%, rgba(27, 191, 131, 0.15) 60%);
   padding: 0 2px;
   font-weight: 600;
-}
-
-/* ===== Result Section ===== */
-.result-section {
-  padding: 0 24px;
-}
-
-.result-hero {
-  text-align: center;
-  padding: 40px 0 32px;
-}
-
-.result-emoji {
-  font-size: 56px;
-  display: block;
-  margin-bottom: 16px;
-}
-
-.result-label {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--green-deep);
-  background: var(--green-bg);
-  border: 1px solid var(--green-border);
-  padding: 4px 16px;
-  border-radius: 20px;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
-}
-
-.result-title {
-  font-size: 22px;
-  font-weight: 800;
-  line-height: 1.4;
-  color: var(--text);
-}
-
-.result-card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 24px 20px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(0,0,0,0.04);
-}
-
-.result-card-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-
-.result-reason {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--green-deep);
-  line-height: 1.7;
-  margin-bottom: 14px;
-}
-
-.result-points {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.result-points li {
-  position: relative;
-  padding-left: 16px;
-  font-size: 14px;
-  color: var(--text-soft);
-  line-height: 1.8;
-  margin-bottom: 6px;
-}
-
-.result-points li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--green);
-}
-
-.result-how {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.7;
-  margin-bottom: 14px;
-}
-
-.result-steps {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  counter-reset: step;
-}
-
-.result-steps li {
-  counter-increment: step;
-  position: relative;
-  padding-left: 32px;
-  font-size: 14px;
-  color: var(--text);
-  line-height: 1.8;
-  margin-bottom: 10px;
-}
-
-.result-steps li::before {
-  content: counter(step);
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green), var(--green-deep));
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* ===== Info Gap Card ===== */
@@ -487,7 +370,6 @@ body {
   border: 1.5px solid var(--orange-border);
   border-radius: var(--radius);
   padding: 22px 20px;
-  margin-bottom: 16px;
 }
 
 .gap-title {
@@ -523,7 +405,6 @@ body {
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 22px 20px;
-  margin-bottom: 16px;
   box-shadow: var(--shadow);
   border: 1px solid rgba(0,0,0,0.04);
 }
@@ -575,9 +456,12 @@ body {
   white-space: nowrap;
 }
 
-/* ===== CTA ===== */
+/* ===== CTA Section ===== */
+.cta-section {
+  padding: 0 24px;
+}
+
 .result-cta {
-  margin-top: 8px;
   margin-bottom: 24px;
 }
 
