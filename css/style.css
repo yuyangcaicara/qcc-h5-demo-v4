@@ -11,6 +11,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
   font-size:12px;color:#666;background:#fafafa;border-bottom:1px solid #f0f0f0}
 .bar-badge{background:#2563eb;color:#fff;font-size:10px;font-weight:600;
   padding:2px 8px;border-radius:4px;letter-spacing:0.5px}
+.bar-data{margin-left:auto;font-size:10px;color:#999;font-weight:500}
 
 /* ===== Hero 标题区 ===== */
 .hero{padding:32px 24px 16px;text-align:center;
@@ -95,7 +96,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
 .fi-text{flex:1;display:flex;flex-direction:column;gap:2px}
 .fi-text strong{font-size:14px;font-weight:600;color:#1d1d1f}
 .fi-text span{font-size:12px;color:#888}
-.fi-tag{font-size:11px;font-weight:700;color:#e53e3e;background:#fff0f0;
+.fi-tag{font-size:11px;font-weight:700;color:#fff;background:#e53e3e;
   padding:3px 10px;border-radius:20px;flex-shrink:0;letter-spacing:0.5px}
 
 /* ===== 加微 CTA ===== */
